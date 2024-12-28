@@ -1,12 +1,10 @@
-- 👋 Hi, I’m @Jony
+- 👋 Hi, I’m @
 - 👀 I’m interested in coding
 - 🌱 I’m currently learning python lagnguage
-- 💞️ I’m looking to collaborate with my elder brothers .
-- 📫 How to reach me hckrXyzz@gmail.com
+- 💞️ I’m looking to collaborate
+- 📫 How to reach me
 - 😄 Pronouns: ...
-- ⚡ Just one terget :;; if anyone can help for bypass 403 forbidden this requests
-- i will glad for my hole life
-- *//https://beapi.sharky777.xyz/api/member/details?token="Bearer"///*
+- ⚡ Just one terget :;;
 
 <!---
 HckrXyzz/HckrXyzz is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
