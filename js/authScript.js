@@ -65,3 +65,4 @@ async function authLogin() {
          }
 
          setInterval(checkToken, 600000); // Check every 10 minutes
+checkToken();
