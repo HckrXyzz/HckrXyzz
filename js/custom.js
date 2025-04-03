@@ -339,17 +339,19 @@ async function authLogin() {
          setInterval(checkToken, 600000); // Check every 10 minutes
 checkToken();
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Retrieve the username from local storage
+// Your existing custom.js content
+
+// Function to replace all instances of the username
+function replaceUsername() {
     var username = localStorage.getItem('username');
-    
-    // Check if the username is available
     if (username) {
-        // Replace the text content with the username
-        document.querySelectorAll('h6, h3, span').forEach(function(element) {
-            if (element.textContent === 'John David' || element.textContent === 'John Smith') {
-                element.textContent = username;
+        document.querySelectorAll('body *').forEach(function(element) {
+            if (element.children.length === 0 && element.textContent.includes('John David')) {
+                element.textContent = element.textContent.replace(/John David/g, username);
             }
         });
     }
-});
+}
+
+// Add an event listener to replace the username when the page loads
+document.addEventListener("DOMContentLoaded", replaceUsername);
