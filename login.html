@@ -72,24 +72,10 @@
             </div>
          </div>
       </div>
-      <!-- jQuery -->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <!-- wow animation -->
-      <script src="js/animate.js"></script>
-      <!-- select country -->
-      <script src="js/bootstrap-select.js"></script>
-      <!-- nice scrollbar -->
-      <script src="js/perfect-scrollbar.min.js"></script>
-      <script>
-         var ps = new PerfectScrollbar('#sidebar');
-      </script>
-      <!-- custom js -->
-      <script src="js/custom.js"></script>
-      <script>
+  
+<script>
          
- async function authLogin() {
+    async function authLogin() {
     const membercode = document.getElementById('membercode').value;
     const password = document.getElementById('password').value;
     const domain = "https://hckrxyzz.github.io/";
@@ -108,13 +94,13 @@
         });
 
         if (response.ok) {
+            window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/home';
             const data = await response.json();
             if (data.token) {
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('username', membercode);
                 window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/';
         } else {
-            alert('Login failed');
             console.error('HTTP error:', response.status, response.statusText);
         }
     } catch (error) {
