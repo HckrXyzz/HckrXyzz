@@ -1,43 +1,39 @@
-window.onload = function() {
-    const authToken = localStorage.getItem('authToken');
-    
-    if (!authToken) {
-        window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login'; // Redirect to login page if no token found
-        return;
-    }
+async function authLogin() {
+         const loginUrl = "https://feapi.bigape88.xyz:443/api/token";
+         const membercode = document.getElementById('membercode').value;
+         const password = document.getElementById('password').value;
 
-    const headers = new Headers({
-        'Authorization': 'Bearer ' + authToken,
-        'Sec-Ch-Ua-Platform': '"Windows"',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept': 'application/json, text/plain, */*',
-        'Sec-Ch-Ua': '"Not:A-Brand";v="24", "Chromium";v="134"',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
-        'Sec-Ch-Ua-Mobile': '?0',
-        'Origin': 'https://hckrxyzz.github.io',
-        'Sec-Fetch-Site': 'cross-site',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Dest': 'empty',
-        'Referer': 'https://hckrxyzz.github.io/HckrXyzz/',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Priority': 'u=1, i'
-    });
+         const body = {
+            "membercode": membercode,
+            "password": password,
+            "domain": "https://hckrxyzz.github.io",
+            "platform": "desktop",
+            "option": "2",
+            "fp": "0e609d52598730e61d217ae90ea9be2d"
+         };
 
-    fetch('https://feapi.bigape88.xyz/api/token/validate', {
-        method: 'GET',
-        headers: headers
-    })
-    .then(response => {
-        if (response.ok) {
-            // Token is valid, proceed to load home page
-            console.log('Token is valid');
-        } else {
-            // Token is invalid, redirect to login page
-            window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
-    });
-};
+         const headers = {
+            "Content-Type": "application/json",
+            "Origin": "https://hckrxyzz.github.io"
+         };
+
+         try {
+            const response = await fetch(loginUrl, {
+               method: "POST",
+               headers: headers,
+               body: JSON.stringify(body)
+            });
+            if (response.status === 200) {
+               const result = await response.json();
+               const authToken = result.access_token;
+
+               localStorage.setItem('authToken', authToken);
+               console.log('statusCode:', response.status);
+               console.log('body:', result);
+            } else {
+               alert('Login failed');
+            }
+         } catch (error) {
+            console.error('Error:', error);
+         }
+      }
