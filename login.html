@@ -105,5 +105,19 @@
             }
          }
       </script>
+      <script>
+        function replaceUsername() {
+            var username = localStorage.getItem('username');
+            if (username) {
+                document.querySelectorAll('body *').forEach(function(element) {
+                    if (element.children.length === 0 && element.textContent.includes('John David')) {
+                        element.textContent = element.textContent.replace(/John David/g, username);
+                    }
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", replaceUsername);
+    </script>
    </body>
 </html>
