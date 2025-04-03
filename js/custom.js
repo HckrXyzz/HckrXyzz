@@ -338,3 +338,18 @@ async function authLogin() {
 
          setInterval(checkToken, 600000); // Check every 10 minutes
 checkToken();
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Retrieve the username from local storage
+    var username = localStorage.getItem('username');
+    
+    // Check if the username is available
+    if (username) {
+        // Replace the text content with the username
+        document.querySelectorAll('h6, h3, span').forEach(function(element) {
+            if (element.textContent === 'John David' || element.textContent === 'John Smith') {
+                element.textContent = username;
+            }
+        });
+    }
+});
