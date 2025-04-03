@@ -113,9 +113,6 @@
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('username', membercode);
                 window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/';
-            } else {
-                alert('Login failed');
-            }
         } else {
             alert('Login failed');
             console.error('HTTP error:', response.status, response.statusText);
