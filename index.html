@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Pluto - Responsive Bootstrap Admin Panel Templates</title>
+      <title>HckrXyzz</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -47,7 +47,7 @@
                   </div>
                   <br>
                   <h3>PAGE NOT FOUND !</h3>
-                  <P>YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</P>
+                  <p>YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
                   <div class="center"><a class="main_bt" href="index.html">Go To Home Page</a></div>
                </div>
             </div>
@@ -68,40 +68,39 @@
       </script>
       <!-- custom js -->
       <script src="js/custom.js"></script>
-     <script>
-       window.onload = function() {
-    const authToken = localStorage.getItem('authToken');
-    
-    if (!authToken) {
-        window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login'; // Redirect to login page if no token found
-        return;
-    }
-
-    const headers = new Headers({
-        'Authorization': 'Bearer ' + authToken,
-        'Origin': 'https://hckrxyzz.github.io',
-        'Referer': 'https://hckrxyzz.github.io/HckrXyzz/',
-        'Priority': 'u=1, i'
-    });
-
-    fetch('https://feapi.bigape88.xyz/api/token/validate', {
-        method: 'GET',
-        headers: headers
-    })
-    .then(response => {
-        if (response.ok) {
-         window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/home';
-         console.log('Token is valid');
-        } else {
-            window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/404_error';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-       alert('loginfail');
-    });
-};
-
-     </script>
+      <script>
+        window.onload = function() {
+          const authToken = localStorage.getItem('authToken');
+          
+          if (!authToken) {
+              window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login'; // Redirect to login page if no token found
+              return;
+          }
+      
+          const headers = new Headers({
+              'Authorization': 'Bearer ' + authToken,
+              'Origin': 'https://hckrxyzz.github.io',
+              'Referer': 'https://hckrxyzz.github.io/HckrXyzz/',
+              'Priority': 'u=1, i'
+          });
+      
+          fetch('https://feapi.bigape88.xyz/api/token/validate', {
+              method: 'GET',
+              headers: headers
+          })
+          .then(response => {
+              if (response.ok) {
+                window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/home';
+                console.log('Token is valid');
+              } else {
+                  window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/404_error';
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('Failed to validate token. Please log in again.');
+          });
+      };
+      </script>
    </body>
 </html>
