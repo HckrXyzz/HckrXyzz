@@ -1,14 +1,14 @@
-const htmlCode = document.getElementById('htmlCode');
+const htmlCode = document.getElementById('textareaCode');
 const cssCode = document.getElementById('cssCode');
 const jsCode = document.getElementById('jsCode');
-const previewFrame = document.getElementById('previewFrame');
+const previewFrame = document.getElementById('iframe');
 
 function updatePreview() {
     const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
     iframeDoc.open();
-    iframeDoc.write(htmlCode.value);
+    iframeDoc.write(textareaCode.value);
     iframeDoc.close();
-const formattedHTML = html_beautify(htmlCode.value, {
+const formattedHTML = html_beautify(textareaCode.value, {
     indent_size: 4
 });
     const formattedJS = html_beautify(jsCode, {
@@ -17,13 +17,13 @@ const formattedHTML = html_beautify(htmlCode.value, {
     const formattedCSS = html_beautify(cssCode, {
         indent_size: 4
     });
-    document.getElementById('htmlCode').value = formattedHTML;
+    document.getElementById('textareaCode').value = formattedHTML;
     document.getElementById('cssCode').value = formattedCSS;
     document.getElementById('jsCode').value = formattedJS;
 
 }
 function copyCode() {
-    navigator.clipboard.writeText(htmlCode.value)
+    navigator.clipboard.writeText(textareaCode.value)
         .then(() => {
             alert('HTML code copied to clipboard');
         })
@@ -44,7 +44,7 @@ function downloadHtml() {
     </style>
 </head>
 <body>
-    ${htmlCode.value}
+    ${textareaCode.value}
     <script>
         ${jsCode.value}
     </script>
