@@ -21,7 +21,7 @@ async function authLogin() {
                   if (data.access_token) {
                      localStorage.setItem('authToken', data.access_token);
                      localStorage.setItem('username', membercode);
-                     window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/home';
+                   //  window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/home';
                   } else {
                      console.error('Token not received');
                      alert('Login failed: Token not received');
@@ -40,7 +40,7 @@ async function authLogin() {
             const authToken = localStorage.getItem('authToken');
 
             if (!authToken) {
-               window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
+            //   window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
                return;
             }
 
@@ -55,14 +55,14 @@ async function authLogin() {
             })
             .then(response => {
                if (!response.ok) {
-                  window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
+                //  window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
                }
             })
             .catch(error => {
                console.error('Error:', error);
-               window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
+            //   window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
             });
          }
 
          setInterval(checkToken, 600000); // Check every 10 minutes
-checkToken();
+//checkToken();
