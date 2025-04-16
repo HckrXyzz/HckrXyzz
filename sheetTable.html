@@ -35,8 +35,8 @@
     <link rel="stylesheet" href="css/jquery.fancybox.css" />
 </head>
 
-<body class="inner_page tables_page">
-    <div class="full_container">
+<body class="inner_page tables_page" onload="createTable()">
+    <div class="full_container"> 
         <div class="inner_container">
             <!-- Sidebar  -->
             <nav id="sidebar">
@@ -253,7 +253,7 @@
                                                     <tr>
                                                         <td>July</td>
                                                         <td>Dooley</td>
-                                                        <td>july@example.com</td>
+                                                        <td>july@example.com</td> 
                                                     </tr>
                                                     <tr>
                                                         <td>Mary</td>
@@ -565,19 +565,7 @@
                                         <div class="table-responsive-sm" id="table-container">
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Firstname</th>
-                                                        <th>Lastname</th>
-                                                        <th>Age</th>
-                                                        <th>City</th>
-                                                        <th>Country</th>
-                                                        <th>Sex</th>
-                                                        <th>Example</th>
-                                                        <th>Example</th>
-                                                        <th>Example</th>
-                                                        <th>Example</th>
-                                                    </tr>
+                                                  
                                                 </thead>
                                                 <tbody>
                                                     <tr>
@@ -661,7 +649,38 @@
     <script src="js/custom.js"></script>
     <!-- calendar file css -->
     <script src="js/semantic.min.js"></script>
-    <script src="https://hckrxyzz.github.io/HckrXyzz/js/table.js"></script>
+    <script src="js/table.js"></script>
+    <script>
+async function createTable() {
+      const sheetId = '1phwx00uPnzEfogheEL8Rzm7LcpHvB2QjdbDTZ3Py6RA';
+      const gid = '0'; 
+      const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&id=${sheetId}&gid=${gid}`;
+
+      try {
+        const response = await fetch(url);
+        const csv = await response.text();
+        const rows = csv.split('\n').map(row => row.split(','));
+
+        let html = '<table border="1" cellpadding="5">';
+        rows.forEach(row => {
+          html += '<tr>';
+          row.forEach(cell => {
+            html += `<td>${cell}</td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</table>';
+
+        document.getElementById('table-container').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+        document.getElementById('table-container').innerHTML = 'Failed to load data.';
+      }
+    }
+
+        
+    </script>
 </body>
 
 </html>
