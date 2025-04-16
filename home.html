@@ -29,7 +29,7 @@
       <!-- custom css -->
       <link rel="stylesheet" href="css/custom.css" />
    </head>
-   <body class="dashboard dashboard_1" onload="checkToken()">
+   <body class="dashboard dashboard_1">
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
@@ -527,72 +527,5 @@
       <!-- custom js -->
       <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
-      <script src="js/login.js"></script>
-      <script>
-         window.onload = function() {
-    const authToken = localStorage.getItem('authToken');
-    
-    if (!authToken) {
-        window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login'; // Redirect to login page if no token found
-        return;
-    }
-
-    const headers = new Headers({
-        'Authorization': 'Bearer ' + authToken,
-        'Origin': 'https://hckrxyzz.github.io',
-        'Referer': 'https://hckrxyzz.github.io/HckrXyzz/',
-        'Priority': 'u=1, i'
-    });
-
-    fetch('https://feapi.bigape88.xyz/api/token/validate', {
-        method: 'GET',
-        headers: headers
-    })
-    .then(response => {
-        if (response.ok) {
-            // Token is valid, proceed to load home page
-            console.log('Token is valid');
-        } else {
-            // Token is invalid, redirect to login page
-            window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        window.location.href = 'https://hckrxyzz.github.io/HckrXyzz/login';
-    });
-};
-
-      </script>
-      <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Retrieve the username from local storage
-    var username = localStorage.getItem('username');
-    
-    // Check if the username is available
-    if (username) {
-        // Replace the text content with the username
-        document.querySelectorAll('h6, h3').forEach(function(element) {
-            if (element.textContent === 'username' || element.textContent === 'John Smith') {
-                element.textContent = username;
-            }
-        });
-    }
-});
-</script>
-      <script>
-        function replaceUsername() {
-            var username = localStorage.getItem('username');
-            if (username) {
-                document.querySelectorAll('body *').forEach(function(element) {
-                    if (element.children.length === 0 && element.textContent.includes('username')) {
-                        element.textContent = element.textContent.replace(/username/g, username);
-                    }
-                });
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", replaceUsername);
-    </script>
    </body>
 </html>
