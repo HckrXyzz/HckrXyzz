@@ -37,3 +37,30 @@ async function fetchAccessToken() {
         console.error('Fetch error:', error);
     }
 }
+async function createTable() {
+      const sheetId = '1phwx00uPnzEfogheEL8Rzm7LcpHvB2QjdbDTZ3Py6RA';
+      const gid = '0'; // The sheet tab index, 0 is the first sheet
+      const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&id=${sheetId}&gid=${gid}`;
+
+      try {
+        const response = await fetch(url);
+        const csv = await response.text();
+        const rows = csv.split('\n').map(row => row.split(','));
+
+        let html = '<table border="1" cellpadding="5">';
+        rows.forEach(row => {
+          html += '<tr>';
+          row.forEach(cell => {
+            html += `<td>${cell}</td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</table>';
+
+        document.getElementById('table-container').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+        document.getElementById('table-container').innerHTML = 'Failed to load data.';
+      }
+    }
