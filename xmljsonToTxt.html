@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Extractor</title>
+</head>
+<body>
+    <h1>Extract JSON Data from Text File</h1>
+    <input type="file" id="uploadTxt" accept=".txt" />
+    <button onclick="extractJson()">Extract and Save JSON</button>
+    <h2>Extracted JSON Data:</h2>
+    <div id="output" style="white-space: pre-wrap; border: 1px solid #ddd; padding: 10px;"></div>
+
+    <script>
+        function extractJson() {
+            const fileInput = document.getElementById('uploadTxt');
+            const outputDiv = document.getElementById('output');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select a text file to process!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const textContent = event.target.result;
+                const jsonRegex = /{(?:[^{}]|)*}/g; // Regex to match JSON objects
+                const jsonMatches = textContent.match(jsonRegex);
+
+                if (jsonMatches && jsonMatches.length > 0) {
+                    const formattedJsons = jsonMatches.map(json => {
+                        try {
+                            return JSON.stringify(JSON.parse(json), null, 2); // Format JSON properly
+                        } catch (e) {
+                            return null; // Skip invalid JSON
+                        }
+                    }).filter(Boolean); // Remove invalid entries
+
+                    if (formattedJsons.length > 0) {
+                        const combinedJson = formattedJsons.join('\n\n');
+                        outputDiv.textContent = combinedJson;
+                        createTextFile(combinedJson);
+                    } else {
+                        outputDiv.textContent = 'No valid JSON data found.';
+                    }
+                } else {
+                    outputDiv.textContent = 'No JSON data found in the file.';
+                }
+            };
+
+            reader.readAsText(file);
+        }
+
+        function createTextFile(content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'extracted_json.txt';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

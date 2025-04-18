@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Response Extractor</title>
+</head>
+<body>
+    <h1>Extract Response Text from XML</h1>
+    <input type="file" id="uploadXml" accept=".xml" />
+    <button onclick="extractResponseText()">Extract and Save</button>
+    <h2>Extracted Text:</h2>
+    <div id="output" style="white-space: pre-wrap; border: 1px solid #ddd; padding: 10px;"></div>
+
+    <script>
+        function extractResponseText() {
+            const fileInput = document.getElementById('uploadXml');
+            const outputDiv = document.getElementById('output');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select an XML file to process!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(event.target.result, "application/xml");
+
+                // Find all <response base64="false"> tags
+                const responses = xmlDoc.querySelectorAll('response');
+                let extractedText = '';
+
+                responses.forEach(response => {
+                    extractedText += response.textContent.trim() + '\n'; // Add response content
+                });
+
+                if (extractedText) {
+                    outputDiv.textContent = extractedText;
+                    createTextFile(extractedText);
+                } else {
+                    outputDiv.textContent = 'No matching <response> tags found.';
+                }
+            };
+
+            reader.readAsText(file);
+        }
+
+        function createTextFile(content) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'extracted_responses.txt';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
