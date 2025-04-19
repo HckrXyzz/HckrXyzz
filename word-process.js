@@ -75,7 +75,6 @@
                 alert('Failed to fetch data from the URLs.');
             }
         });
-processWords(combinedText);
         // Function to remove duplicate <li> elements from wordList
         const removeDuplicateLiElements = () => {
             const listItems = Array.from(wordListElement.querySelectorAll('li'));
